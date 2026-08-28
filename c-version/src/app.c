@@ -37,7 +37,7 @@ void app_run_once(void)
 {
     uint16_t raw;
     if (sampling_get_latest(&raw)) {
-        const temp_mc_t   t     = temp_sensor_convert(raw);
+        const temp_mc_t   t     = temp_sensor_filter(temp_sensor_convert(raw));
         const led_state_t state = temp_classify(t);
         led_indicator_set(state);
     }
